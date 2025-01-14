@@ -1,1 +1,1 @@
-# xfce4-transparent-whiskermenu
+# xfce4 transparent whiskermenu for Mint-L-dark theme 
