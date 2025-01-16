@@ -12,7 +12,7 @@ panel_path = '~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml'
 base_color = "#000000"
 opacity = 0"##;
 
-    fs::write("config.toml", config_content)?;
+    fs::write("./config.toml", config_content)?;
     println!("Created default config.toml in the current directory");
     Ok(())
 }
