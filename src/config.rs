@@ -18,7 +18,8 @@ opacity = 0"##;
 }
 
 fn load_config() -> Result<Value, Box<dyn Error>> {
-    let config_content = fs::read_to_string("/config.toml")?;
+    let config_content = fs::read_to_string("./config.toml")?;
+    print!("Config was Loaded");
     let config: Value = toml::from_str(&config_content)?;
     Ok(config)
 }
