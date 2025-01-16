@@ -56,7 +56,8 @@ jobs:
     if: needs.check-version.outputs.should_release == 'true'
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+      os : [ubuntu-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
