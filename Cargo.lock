@@ -376,7 +376,7 @@ dependencies = [
 
 [[package]]
 name = "xfce4-transparent-whiskermenu"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "clap",
  "regex",
