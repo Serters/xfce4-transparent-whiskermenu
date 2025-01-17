@@ -2,17 +2,25 @@ use std::error::Error;
 use std::fs;
 use toml::Value;
 
+use std::env;
+use std::path::PathBuf;
+
 pub fn create_default_config() -> Result<(), Box<dyn Error>> {
-    let config_content = r##"# default_paths
-theme_path = 'usr/share/themes/Mint-L-Dark/gtk-3.0/gtk-dark.css'
-whisker_menu_path ='~/.config/xfce4/panel/'
-panel_path = '~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml'
+    let home_dir = env::var("HOME").unwrap_or_else(|_| "/home".to_string());
+
+    let config_content = format!(r##"# default_paths
+theme_path = '/usr/share/themes/Mint-L-Dark/gtk-3.0/gtk-dark.css'
+whisker_menu_path = '{home_dir}/.config/xfce4/panel/'
+panel_path = '{home_dir}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml'
 
 # colors
 base_color = "#000000"
-opacity = 0"##;
+opacity = 0.0
+search_color = "#000000"
+search_opacity = 0.0"##);
 
-    fs::write("./config.toml", config_content)?;
+    let config_path = PathBuf::from("./config.toml");
+    fs::write(config_path, config_content)?;
     println!("Created default config.toml in the current directory");
     Ok(())
 }
@@ -66,4 +74,21 @@ pub fn get_opacity() -> Result<f32, Box<dyn Error>> {
     Ok(config["opacity"]
         .as_float()
         .ok_or("Opacity not found in config")? as f32)
+}
+
+pub fn get_search_color() -> Result<String, Box<dyn Error>> {
+    let config: Value = load_config()?;
+    
+    Ok(config["search_color"]
+        .as_str()
+        .ok_or("Search color not found in config")?
+        .to_string())
+}
+
+pub fn get_search_opacity() -> Result<f32, Box<dyn Error>> {
+    let config: Value = load_config()?;
+    
+    Ok(config["search_opacity"]
+        .as_float()
+        .ok_or("Search opacity not found in config")? as f32)
 }

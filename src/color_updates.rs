@@ -12,11 +12,11 @@ pub fn update_whiskar_menu() -> Result<(), Box<dyn Error>> {
     let hex_code = config::get_base_color()?;
     let opacity = config::get_opacity()?;
 
-    let menu_opacity = opacity;
-    let inverted_opacity = (((1.0 - opacity) * 100.0).round()) / 100.0;
+    // let menu_opacity = opacity;
+    // let inverted_opacity = (((1.0 - opacity) * 100.0).round()) / 100.0;
 
     let mut theme_content = fs::read_to_string(&theme_path)?;
-    let new_color = hex_to_rgba(&hex_code, inverted_opacity)?;
+    let new_color = hex_to_rgba(&hex_code, 0.0)?;
     let base_new_color = hex_to_rgba(&hex_code, 0.99)?;
 
     let base_menu_re = Regex::new(regex_patterns::PATTERN_BASE_MENU)?;
@@ -42,14 +42,14 @@ pub fn update_whiskar_menu() -> Result<(), Box<dyn Error>> {
     for entry in fs::read_dir(whisker_menu_dir)? {
         let entry = entry?;
         let path = entry.path();
+        let new_opacity = (opacity * 100.0) as u32;
 
         if let Some(file_name) = path.file_name().and_then(|n| n.to_str()) {
             if whisker_menu_pattern.is_match(file_name) {
                 let mut content = fs::read_to_string(&path)?;
                 content = menu_opacity_re
                     .replace_all(&content, |caps: &regex::Captures| {
-                        // Use the captured prefix and append the new value
-                        format!("{}{}", &caps[1], menu_opacity)
+                        format!("{}{}", &caps[1], new_opacity)
                     })
                     .to_string();
                 fs::write(&path, content)?;
@@ -61,8 +61,8 @@ pub fn update_whiskar_menu() -> Result<(), Box<dyn Error>> {
 
 pub fn update_search_bar() -> Result<(), Box<dyn Error>> {
     let path = config::get_theme_path()?;
-    let hex_code = config::get_base_color()?;
-    let opacity = config::get_opacity()?;
+    let hex_code = config::get_search_color()?;
+    let opacity = config::get_search_opacity()?;
 
     let mut content = fs::read_to_string(&path)?;
 
