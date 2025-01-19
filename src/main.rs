@@ -6,7 +6,7 @@ mod utils;
 use std::error::Error;
 use clap::{Parser, CommandFactory};
 
-use crate::color_updates::{update_search_bar, update_whiskar_menu, update_panel};
+use crate::color_updates::{update_search_bar, update_whiskar_menu, update_panel, update_border};
 use crate::config::create_default_config;
 
 #[derive(Parser)]
@@ -27,6 +27,9 @@ struct Cli {
 
     #[arg(long)]
     createconfig: bool,
+
+    #[arg(long)]
+    updateborder: bool
 }
 fn main() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse();
@@ -52,6 +55,10 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     if cli.updateall || cli.updatepanel {
         update_panel()?;
+    }
+
+    if cli.updateall || cli.updateborder {
+        update_border()?;
     }
 
     Ok(())

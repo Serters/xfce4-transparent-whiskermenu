@@ -13,3 +13,5 @@ pub const PATTERN_PANEL_BACKGROUND_RGBA: &str = r#"<property name="background-rg
         <value type="double" value="([^"]+)"/>\s*
         <value type="double" value="([^"]+)"/>\s*
       </property>"#;
+
+      pub const PATTERN_BORDER_COLOR: &str = r"entry\s*\{\s*border:\s*[^;]+;\s*padding:\s*[^;]+;\s*caret-color:\s*[^;]+;\s*border-radius:\s*[^;]+;\s*transition:\s*[^;]+;\s*color:\s*[^;]+;\s*border-color:\s*([^;]+);\s*background-color:\s*[^;]+;\s*\}";

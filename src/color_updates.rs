@@ -115,3 +115,22 @@ pub fn update_panel() -> Result<(), Box<dyn Error>> {
     fs::write(&panel_path, content)?;
     Ok(())
 }
+
+pub fn update_border() -> Result<(), Box<dyn Error>> {
+    
+    let theme_path = config::get_theme_path()?;
+    let border_color = config::get_base_color()?;
+
+    let mut content = fs::read_to_string(&theme_path)?;
+
+    let border_re = Regex::new(regex_patterns::PATTERN_BORDER_COLOR)?;
+
+    content = border_re
+        .replace_all(&content, |caps: &regex::Captures| {
+            caps[0].replace(&caps[1], &border_color)
+        })
+        .to_string();
+
+    fs::write(&theme_path, content)?;
+    Ok(())
+}
