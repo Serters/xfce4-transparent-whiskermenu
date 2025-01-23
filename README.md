@@ -44,6 +44,20 @@ xfce4-panel -r
 
 ## Example
 
+**Default config.toml file**
+```
+# default_paths
+theme_path = '/usr/share/themes/Mint-L-Dark/gtk-3.0/gtk-dark.css'
+whisker_menu_path = '~/.config/xfce4/panel/'
+panel_path = '/home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml'
+
+# colors
+base_color = "#000000"
+opacity = 0.0
+search_color = "#000000"
+search_opacity = 0.0
+```
+
 <div align="center">
   <img src="https://github.com/Serters/xfce4-transparent-whiskermenu/blob/main/resources/example.png" alt="Example" width="100%">
 </div>
