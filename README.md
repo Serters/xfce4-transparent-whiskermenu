@@ -1,4 +1,9 @@
-# xfce4 whiskermenu & panel customizer?
+# xfce4 whiskermenu & panel simple configurator
+
+![GitHub Release](https://img.shields.io/github/v/release/serters/xfce4-transparent-whiskermenu)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/serters/xfce4-transparent-whiskermenu/total)
+![GitHub top language](https://img.shields.io/github/languages/top/Serters/xfce4-transparent-whiskermenu)
+![GitHub Repo stars](https://img.shields.io/github/stars/Serters/xfce4-transparent-whiskermenu)
 
 ## Key Features
 
