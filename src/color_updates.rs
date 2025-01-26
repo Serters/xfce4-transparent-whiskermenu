@@ -93,9 +93,9 @@ pub fn update_panel() -> Result<(), Box<dyn Error>> {
     let opacity = config::get_opacity()?;
 
     let mut content = fs::read_to_string(&panel_path)?;
-    
+
     let rgba_values = hex_to_normalized_rgba(&hex_code, opacity)?;
-    
+
     let panel_background_re = Regex::new(regex_patterns::PATTERN_PANEL_BACKGROUND_RGBA)?;
 
     content = panel_background_re
@@ -117,7 +117,6 @@ pub fn update_panel() -> Result<(), Box<dyn Error>> {
 }
 
 pub fn update_border() -> Result<(), Box<dyn Error>> {
-    
     let theme_path = config::get_theme_path()?;
     let border_color = config::get_base_color()?;
 

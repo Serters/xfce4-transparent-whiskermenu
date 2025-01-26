@@ -1,39 +1,20 @@
-use crate::regex_patterns;
 use regex::Regex;
 use std::error::Error;
-use std::fs;
 
-pub fn read_color_values(path: &str) -> Result<(), Box<dyn Error>> {
-    let content = fs::read_to_string(path)?;
-
-    let base_menu_re = Regex::new(regex_patterns::PATTERN_BASE_MENU)?;
-    let menu_opacity_re = Regex::new(regex_patterns::PATTERN_MENU_OPACITY)?;
-    let search_focus_re = Regex::new(regex_patterns::PATTERN_SEARCH_FOCUS)?;
-    let search_unfocused_re = Regex::new(regex_patterns::PATTERN_SEARCH_UNFOCUSED)?;
-
-    println!("Base Menu Colors:");
-    for cap in base_menu_re.captures_iter(&content) {
-        println!("{}", &cap[1]);
-    }
-
-    println!("\nMenu Opacity Colors:");
-    for cap in menu_opacity_re.captures_iter(&content) {
-        println!("{}", &cap[1]);
-    }
-
-    println!("\nSearch Focus Colors:");
-    for cap in search_focus_re.captures_iter(&content) {
-        println!("{}", &cap[1]);
-    }
-
-    println!("\nSearch Unfocused Colors:");
-    for cap in search_unfocused_re.captures_iter(&content) {
-        println!("{}", &cap[1]);
-    }
-
-    Ok(())
-}
-
+/// Converts a hexadecimal color code to an RGBA string representation.
+///
+/// # Arguments
+/// - `hex_code`: A string slice representing the hexadecimal color code.
+///    Must be in the format `#RRGGBB` or `#RGB`.
+/// - `opacity`: A `f32` value between 0.0 and 1.0 representing the alpha (opacity) value.
+///
+/// # Returns
+/// - An `Ok(String)` containing the `rgba(r, g, b, a)` string representation of the color if the conversion is successful.
+/// - An `Err` if the input is invalid.
+///
+/// # Errors
+/// - The hex code is not in the correct format.
+/// - The opacity value is not between 0.0 and 1.0.
 pub fn hex_to_rgba(hex_code: &str, opacity: f32) -> Result<String, Box<dyn Error>> {
     let hex_regex = Regex::new(r"^#([0-9A-Fa-f]{3}){1,2}$")?;
     if !hex_regex.is_match(hex_code) {
@@ -65,6 +46,23 @@ pub fn hex_to_rgba(hex_code: &str, opacity: f32) -> Result<String, Box<dyn Error
     Ok(format!("rgba({}, {}, {}, {})", r, g, b, opacity))
 }
 
+
+/// Converts a hexadecimal color code to a normalized RGBA array.
+///
+/// # Arguments
+/// - `hex_code`: A string slice representing the hexadecimal color code. 
+///    Must be in the format `#RRGGBB` or `#RGB`.
+/// - `opacity`: A `f32` value between 0.0 and 1.0 representing the alpha (opacity) value.
+///
+/// # Returns
+/// - An `Ok([f32; 4])` containing:
+/// - Red, green, blue and alpha components normalized to the range `[0.0, 1.0]`.
+/// - An `Err` if the input is invalid.
+///
+/// # Errors
+/// - The hex code is not in the correct format.
+/// - The opacity value is not between 0.0 and 1.0.
+/// - The hex code cannot be parsed into numeric values.
 pub fn hex_to_normalized_rgba(hex_code: &str, opacity: f32) -> Result<[f32; 4], Box<dyn Error>> {
     let hex_regex = Regex::new(r"^#([0-9A-Fa-f]{3}){1,2}$")?;
     if !hex_regex.is_match(hex_code) {

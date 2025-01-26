@@ -3,10 +3,10 @@ mod config;
 mod regex_patterns;
 mod utils;
 
+use clap::{CommandFactory, Parser};
 use std::error::Error;
-use clap::{Parser, CommandFactory};
 
-use crate::color_updates::{update_search_bar, update_whiskar_menu, update_panel, update_border};
+use crate::color_updates::{update_border, update_panel, update_search_bar, update_whiskar_menu};
 use crate::config::create_default_config;
 
 #[derive(Parser)]
@@ -29,13 +29,17 @@ struct Cli {
     createconfig: bool,
 
     #[arg(long)]
-    updateborder: bool
+    updateborder: bool,
 }
 fn main() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse();
 
-    if !cli.updatepanel && !cli.updatewhisker && !cli.updatesearch && 
-       !cli.updateall && !cli.createconfig {
+    if !cli.updatepanel
+        && !cli.updatewhisker
+        && !cli.updatesearch
+        && !cli.updateall
+        && !cli.createconfig
+    {
         Cli::command().print_help()?;
         return Ok(());
     }
