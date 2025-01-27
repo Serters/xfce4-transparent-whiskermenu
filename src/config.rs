@@ -5,6 +5,25 @@ use toml::Value;
 use std::env;
 use std::path::PathBuf;
 
+/// Creates a default configuration file (`config.toml`) in the current directory.
+///
+/// This function generates a TOML-formatted configuration file with default paths and settings
+/// for customizing the Xfce Whisker Menu, panel, and related components. The file is saved in the
+/// current working directory as `config.toml`.
+///
+/// # Default Configuration
+/// The generated configuration file includes the following fields:
+/// - `theme_path`: Path to the GTK theme CSS file (default: `/usr/share/themes/Mint-L-Dark/gtk-3.0/gtk-dark.css`).
+/// - `whisker_menu_path`: Path to the Whisker Menu configuration directory (default: `~/.config/xfce4/panel/`).
+/// - `panel_path`: Path to the Xfce panel configuration file (default: `~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml`).
+/// - `base_color`: Base color for the UI components (default: `#000000`).
+/// - `opacity`: Opacity level for the UI components (default: `0.0`).
+/// - `search_color`: Color for the search bar (default: `#000000`).
+/// - `search_opacity`: Opacity level for the search bar (default: `0.0`).
+///
+/// # Returns
+/// - `Ok(())` if the configuration file is successfully created.
+/// - `Err(Box<dyn Error>)` if an error occurs during file creation or writing.
 pub fn create_default_config() -> Result<(), Box<dyn Error>> {
     let home_dir = env::var("HOME").unwrap_or_else(|_| "/home".to_string());
 

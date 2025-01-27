@@ -6,6 +6,16 @@ use crate::config;
 use crate::regex_patterns;
 use crate::utils::{hex_to_normalized_rgba, hex_to_rgba};
 
+/// Updates the Whisker Menu color and transparency in the linux theme configuration.
+///
+/// This function:
+/// 1. Reads the current theme configuration
+/// 2. Updates base menu colors and opacity using regular expressions
+/// 3. Updates all whiskermenu-*.rc files in the Whisker Menu directory
+///
+/// # Returns
+/// - `Ok(())` on successful update of all configurations
+/// - `Err(Box<dyn Error>)` if any file operations or regex operations fail
 pub fn update_whiskar_menu() -> Result<(), Box<dyn Error>> {
     let theme_path = config::get_theme_path()?;
     let whisker_menu_dir = config::get_whisker_menu_path()?;
@@ -59,6 +69,14 @@ pub fn update_whiskar_menu() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// Updates the search bar colors and transparency in the linux theme configuration. 
+///
+/// Applies the specified search color and opacity to both focused and unfocused
+/// search bar states in the theme file.
+///
+/// # Returns
+/// - `Ok(())` on successful update
+/// - `Err(Box<dyn Error>)` for file I/O or regex errors
 pub fn update_search_bar() -> Result<(), Box<dyn Error>> {
     let path = config::get_theme_path()?;
     let hex_code = config::get_search_color()?;
@@ -87,6 +105,14 @@ pub fn update_search_bar() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// Updates the panel background color and transparency.
+///
+/// Converts the base color and opacity to normalized RGBA values and updates
+/// the panel configuration XML file.
+///
+/// # Returns
+/// - `Ok(())` on successful write
+/// - `Err(Box<dyn Error>)` for file operations or color conversion errors
 pub fn update_panel() -> Result<(), Box<dyn Error>> {
     let panel_path = config::get_panel_path()?;
     let hex_code = config::get_base_color()?;
@@ -116,6 +142,13 @@ pub fn update_panel() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// Updates whiskar menu border colors in the linux theme configuration.
+///
+/// Applies the base color to all borders in the whisker menu.
+///
+/// # Returns
+/// - `Ok(())` on success
+/// - `Err(Box<dyn Error>)` for I/O or regex errors
 pub fn update_border() -> Result<(), Box<dyn Error>> {
     let theme_path = config::get_theme_path()?;
     let border_color = config::get_base_color()?;
