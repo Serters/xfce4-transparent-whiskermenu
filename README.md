@@ -13,8 +13,12 @@
 4. **All in one config**: Change everything in only one simple configuration file.
 
 ## Usage
+1. **[Download](https://github.com/Serters/xfce4-transparent-whiskermenu/releases/download/v0.1.6/xfce4-transparent-whiskermenu-linux) or compile the executable.**
+```
+https://github.com/Serters/xfce4-transparent-whiskermenu/releases/download/v0.1.6/xfce4-transparent-whiskermenu-linux
+```
 
-1. **Backup current configurations**:
+2. **Backup current configurations**:
 ```
 mkdir -p backup && \
 cp /usr/share/themes/Mint-L-Dark/gtk-3.0/gtk-dark.css backup/ && \
@@ -22,27 +26,27 @@ cp ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml backup/ && \
 cp ~/.config/xfce4/panel/*.rc backup/
 ```
 
-2. **Navigate to the executable, create configuration file and edit it using a text editor**:
+3. **Navigate to the executable, create configuration file and edit it using a text editor**:
 ```
 xfce4-transparent-whiskermenu --createconfig
 ```
 
-3. **Close the xfconfdl using kill or killall**:
+4. **Close the xfconfdl using kill or killall**:
 ```
 killall xfconfd
 ```
 
-3. **View all avalable commands**:
+5. **View all avalable commands**:
 ```
 xfce4-transparent-whiskermenu --help
 ```
 
-4. **Run one of the update command to apply the configuration**:
+6. **Run one of the update command to apply the configuration**:
 ```
 sudo xfce4-transparent-whiskermenu --updateall
 ```
 
-5. **Restart the panel or reboot to view changes**:
+7. **Restart the panel or reboot to view changes**:
 ```
 xfce4-panel -r
 ```
