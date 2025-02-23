@@ -20,7 +20,6 @@ https://github.com/Serters/xfce4-transparent-whiskermenu/releases/download/v0.1.
 ```
 
 > [!IMPORTANT]  
-> Pay attention to this.  
 > Before making any changes, create a backup of your current settings to avoid any issues.  
 >  
 > ```sh
